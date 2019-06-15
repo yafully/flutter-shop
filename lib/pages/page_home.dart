@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+//import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import '../service/service_method.dart';
 import '../components/swiper.dart';//轮播组件
 import '../components/home_menu.dart';//首页分类导航
@@ -7,7 +9,9 @@ import '../components/home_ad.dart';//首页广告条
 import '../components/home_phone.dart';//首页电话
 import '../components/home_recommend.dart';//首页推荐
 import '../components/home_floor.dart';//首页楼层
-//import 'dart:convert';
+//import '../components/home_hot.dart';//首页火爆专区
+import '../components/home_hot.dart' as hot;
+//import 'dart:convert'; //Jsondecode需要用到
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,14 +19,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
+
   @override
   bool get wantKeepAlive => true;
 
-  @override
-  void initState() {
-    super.initState();
-    print('1111');
-  }
+  GlobalKey<RefreshFooterState> _footerkey = new GlobalKey<RefreshFooterState>();
 
   String homePageContent = '正在获取数据';
   @override
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     return Scaffold(
       appBar: AppBar(title:Text('HomeApp')),
       body: FutureBuilder(
-        future: getHomePageContent(),
+        future: getData('homePageContent',formData:{'city':'wuhan'}),
         builder: (context, snapshot){
           if(snapshot.hasData){
             
@@ -46,8 +47,18 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
             String floorImage = data['data']['data']['homeFloor'][0]['image'];
             List<Map> floorGoodsList = (data['data']['data']['homeFloor'][0]['goods'] as List).cast();
             //print(recommendList);
-            return SingleChildScrollView(
-              child: Column(
+            return EasyRefresh(
+              refreshFooter: ClassicsFooter(
+                key: _footerkey,
+                bgColor: Colors.white,
+                textColor: Colors.pink,
+                moreInfoColor: Colors.pink,
+                showMore: true,
+                noMoreText: '',
+                moreInfo: 'Loading...',
+                loadReadyText: 'pull load...',
+              ),
+              child: ListView(
               children: <Widget>[
                   SwiperDiy(swiperDataList: swiperDataList),
                   HomeMenu(homeMenuList: homeMenuList),
@@ -55,9 +66,14 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                   HomePhone(homePhoneImage: homePhoneImage, homePhoneNumber: homePhoneNumber),
                   Recommend(recommendList: recommendList),
                   FloorTitle(floorImage: floorImage),
-                  FloorContent(floorGoodsList: floorGoodsList)
+                  FloorContent(floorGoodsList: floorGoodsList),
+                  hot.HotGoods()
                 ],
-              )
+              ),
+              loadMore:()async{
+                print('===Load More===');
+                //hot.HotGoods()._getHotGoods();
+              }
             );
 
           }else{
@@ -69,15 +85,5 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
       )
     );
   }
-
-  // void initState(){
-  //   getHomePageContent().then((val){
-  //     print(val);
-  //     setState((){
-  //       homePageContent = val.toString();
-  //     });
-  //   });
-  //   super.initState();
-  // }
 
 }

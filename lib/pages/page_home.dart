@@ -3,14 +3,14 @@ import 'package:flutter/widgets.dart';
 //import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import '../service/service_method.dart';
-import '../components/swiper.dart';//轮播组件
-import '../components/home_menu.dart';//首页分类导航
-import '../components/home_ad.dart';//首页广告条
-import '../components/home_phone.dart';//首页电话
-import '../components/home_recommend.dart';//首页推荐
-import '../components/home_floor.dart';//首页楼层
+import '../components/Home/swiper.dart';//轮播组件
+import '../components/Home/home_menu.dart';//首页分类导航
+import '../components/Home/home_ad.dart';//首页广告条
+import '../components/Home/home_phone.dart';//首页电话
+import '../components/Home/home_recommend.dart';//首页推荐
+import '../components/Home/home_floor.dart';//首页楼层
 //import '../components/home_hot.dart';//首页火爆专区
-import '../components/home_hot.dart' as hot;
+import '../components/Home/home_hot.dart' as hot;
 //import 'dart:convert'; //Jsondecode需要用到
 
 class HomePage extends StatefulWidget {

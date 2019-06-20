@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../service/service_method.dart';
+import '../../service/service_method.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HotGoods extends StatefulWidget {

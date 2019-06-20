@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../service/service_method.dart';
 
+import '../components/Catagory/catagory_left.dart';//左侧导航
+import '../components/Catagory/catagory_right.dart';//右侧导航
+//import '../model/catagory.dart';
 //stless 静态组建快速构建命令
 //stful 动态组件命令
 
@@ -13,22 +15,25 @@ class _CatagoryPageState extends State<CatagoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text('Catagory'),
-      ),
+    return Scaffold(
+      appBar: AppBar(title: Text('Catagory')),
+      body:Container(
+        child: Row(
+          children: <Widget>[
+            LeftCataNav(),
+            Column(
+              children: <Widget>[
+                RightCatagory(),
+                Text('bottom')
+              ],
+            )
+          ],
+        ),
+      )
     );
   }
 
-  void _getCategory() async{
-    await getData('getCatagory').then((val){
-      print(val);
-    });
-  }
-
-  void initState() {
-    super.initState();
-    _getCategory();
-    print('999');
-  }
 }
+
+
+

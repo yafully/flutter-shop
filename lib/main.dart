@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 import './pages/page_index.dart';
-void main()=>runApp(MyApp());
+import 'package:provide/provide.dart';
+import './provide/increase.dart';
+import './provide/child_catagory.dart';
+
+void main(){
+  var counter = Counter();
+  var childCatagory = ChildCatagory();
+  var providers = Providers();
+  providers
+  ..provide(Provider<Counter>.value(counter))
+  ..provide(Provider<ChildCatagory>.value(childCatagory));
+  //多状态管理是
+  // providers
+  // ..provide(Provider<Counter1>.value(counter1))
+  // ..provide(Provider<Counter2>.value(counter2));
+  runApp(ProviderNode(child:MyApp(),providers:providers));
+}
 
 class MyApp extends StatelessWidget {
   @override

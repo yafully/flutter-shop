@@ -14,6 +14,7 @@
 
 //stful命令快速创建动态组建
 import 'package:flutter/material.dart';
+import '../components/Global/global_searchbar.dart';//轮播组件
 import 'package:flutter/cupertino.dart';
 import 'page_home.dart';
 import 'page_catagory.dart';
@@ -78,10 +79,45 @@ class _IndexPageState extends State<IndexPage> {
           });
         },
       ),
+      appBar: MyCustomAppBar(
+        height: 60,
+      ),
       body: IndexedStack(
         index: currentIndex,
         children: tabPages
       ),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            Container(
+              height:90.0,
+              child:DrawerHeader(
+                child: Text('Menu'),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+              )
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        )
+      ),
     );
   }
 }
+

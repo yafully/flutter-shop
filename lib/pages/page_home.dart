@@ -29,7 +29,17 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:Text('HomeApp')),
+      // appBar: AppBar(
+      //   title:Text('HomeApp'),
+      //   actions: <Widget>[
+      //     IconButton(
+      //       icon: Icon(Icons.search),
+      //       onPressed: (){
+      //         print('111');
+      //       },
+      //     )
+      //   ],
+      // ),
       body: FutureBuilder(
         future: getData('homePageContent',formData:{'city':'wuhan'}),
         builder: (context, snapshot){

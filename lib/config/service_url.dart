@@ -3,4 +3,5 @@ const servicePath = {
   'homePageContent':serviceUrl+'homedata/',//首页主要数据
   'homePageHotContent':serviceUrl+'hotdata/',//首页热卖
   'getCatagory': serviceUrl+'getCatagory/',//产品分类
+  'getGoods': serviceUrl+'getGoods/',//产品列表
 };

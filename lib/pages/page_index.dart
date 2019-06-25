@@ -15,6 +15,7 @@
 //stful命令快速创建动态组建
 import 'package:flutter/material.dart';
 import '../components/Global/global_searchbar.dart';//轮播组件
+import '../components/Global/global_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'page_home.dart';
 import 'page_catagory.dart';
@@ -92,32 +93,31 @@ class _IndexPageState extends State<IndexPage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             Container(
-              height:90.0,
+              height:140.0,
               child:DrawerHeader(
-                child: Text('Menu'),
+                child: UserAccountsDrawerHeader(
+                  accountName: Text("Ashish Rawat"),
+                  accountEmail: Text("ashishrawat2911@gmail.com"),
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                  ),
+                  onDetailsPressed:(){
+                    print('user click');
+                  }
+                ),
                 decoration: BoxDecoration(
                   color: Colors.blue,
                 ),
+                
               )
             ),
-            ListTile(
-              title: Text('Item 1'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: Text('Item 2'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
+            MainMenus(),
           ],
         )
       ),
     );
   }
 }
+
+
 

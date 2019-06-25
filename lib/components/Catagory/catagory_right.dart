@@ -40,13 +40,11 @@ class _RightCatagoryState extends State<RightCatagory> {
   }
 
   Widget _rightInkWell(data){
-
     //Map valueMap = json.decode(data);
     //print(data.runtimeType);
     //var d = new Map<String, dynamic>.from(data);
     //print(data.keys);
     //var data=json.decode(data.toString());
-
 
     return InkWell(
       onTap: (){},

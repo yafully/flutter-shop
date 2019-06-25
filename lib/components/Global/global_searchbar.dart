@@ -38,7 +38,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.verified_user),
+                  icon: Icon(Icons.shopping_cart),
                   onPressed: () => null,
                 ),
               ]),

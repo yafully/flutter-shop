@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
 
-  const MyCustomAppBar({
-    Key key,
-    @required this.height,
-  }) : super(key: key);
+  const MyCustomAppBar({Key key,@required this.height,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +25,18 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 Expanded(
                   child: Container(
-                    color: Colors.white,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: "Search",
-                        contentPadding: EdgeInsets.all(10.0),
-                      ),
-                    ),
-                  ),
+                    child:new Image.asset('images/logo.png',width: 127,height: 38,),
+                    // color: Colors.white,
+                    // child: TextField(
+                    //   decoration: InputDecoration(
+                    //     hintText: "Search",
+                    //     contentPadding: EdgeInsets.all(10.0),
+                    //   ),
+                    // ),
+                  )
                 ),
                 IconButton(
-                  icon: Icon(Icons.shopping_cart),
+                  icon: Icon(Icons.search),
                   onPressed: () => null,
                 ),
               ]),

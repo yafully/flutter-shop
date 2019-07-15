@@ -1,59 +1,34 @@
 import 'package:flutter/material.dart';
 import '../../service/service_method.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-class HotGoods extends StatefulWidget {
+//产品列表
+class CatagoryGoodList extends StatefulWidget {
   @override
-  _HotGoodsState createState() => _HotGoodsState();
+  _CatagoryGoodListState createState() => _CatagoryGoodListState();
 }
 
-class _HotGoodsState extends State<HotGoods> {
+class _CatagoryGoodListState extends State<CatagoryGoodList> {
   int page = 1;
-  List<Map> hotGoodsList = [];
+  List<Map> goodsList = [];
 
   void initState() {
+    _getGoodList();
     super.initState();
-    _getHotGoods();
   }
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width:750, height: 1334)..init(context);//初始化屏幕适配
     return Container(
-      child:_hotGoods()
+      child: _goods(),
     );
   }
 
-  void _getHotGoods() {
-    var pageData = {'page':page};
-
-    getData('homePageHotContent',formData:pageData).then((val){
-      //hotGoodsList
-      var data = val;
-      List<Map> newGoodsList = (data['data']['data'] as List).cast();
-      setState((){
-        hotGoodsList.addAll(newGoodsList);//合并数组
-        page++;
-      });
-    });
-  }
-
-  Widget hotTitle = Container(
-    margin: EdgeInsets.only(top: 10.0),
-    padding:EdgeInsets.all(5.0),
-    alignment:Alignment.center,
-    decoration: BoxDecoration(
-      color: Colors.white,
-      border:Border(
-        bottom: BorderSide(width:0.5 ,color:Colors.black12)
-      )
-    ),
-    child: Text('Hot Products'),
-  );
-
   Widget _wrapList(){
-    if(hotGoodsList.length>0){
+    if(goodsList.length>0){
+      print("长度");
+      print(goodsList.length);
       //把数据数组转化成组件数组
-      List<Widget> listWidget = hotGoodsList.map((val){
+      List<Widget> listWidget = goodsList.map((val){
         return InkWell(
           onTap: (){},
           child:Container(
@@ -91,16 +66,34 @@ class _HotGoodsState extends State<HotGoods> {
       return Text('');
     }
   }
-
-  Widget _hotGoods(){
+  Widget _goods(){
     return Container(
       child: Column(
         children: <Widget>[
-          hotTitle,
           _wrapList(),
         ],
       )
     );
+  }
+
+  void _getGoodList() {
+    var data = {
+      'catagoryId':'4',
+      'page':page
+    };
+
+    getData('getGoods',formData:data).then((val){
+      //print(val);
+      //GoodListModel goodList = GoodListModel.fromJson(val);
+      //print(goodList.data[0].name);
+      var data = val;
+      List<Map> newGoodsList = (data['data'] as List).cast();
+      setState((){
+        goodsList.addAll(newGoodsList);//合并数组
+        page++;
+      });
+    });
+
   }
 
 }

@@ -3,13 +3,16 @@ import './pages/page_index.dart';
 import 'package:provide/provide.dart';
 import './provide/increase.dart';
 import './provide/child_catagory.dart';
+import './provide/catagory_goods_list.dart';
 
 void main(){
   var counter = Counter();
   var childCatagory = ChildCatagory();
+  var catagoryGoodsListProvide = CatagoryGoodsListProvide();
   var providers = Providers();
   providers
   ..provide(Provider<Counter>.value(counter))
+  ..provide(Provider<CatagoryGoodsListProvide>.value(catagoryGoodsListProvide))
   ..provide(Provider<ChildCatagory>.value(childCatagory));
   //多状态管理是
   // providers

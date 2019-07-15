@@ -15,13 +15,16 @@
 //stful命令快速创建动态组建
 import 'package:flutter/material.dart';
 import '../components/Global/global_searchbar.dart';//轮播组件
-import '../components/Global/global_menu.dart';
+//import '../components/Global/global_menu.dart';
+import '../components/Global/global_drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'page_home.dart';
 import 'page_catagory.dart';
 import 'page_cart.dart';
 import 'page_account.dart';
 
+import '../service/service_method.dart';
+import '../model/catagory.dart';
 
 class IndexPage extends StatefulWidget {
   @override
@@ -31,11 +34,11 @@ class IndexPage extends StatefulWidget {
 class _IndexPageState extends State<IndexPage> {
   final List<BottomNavigationBarItem> bottomTabs = [
     BottomNavigationBarItem(
-      icon: Icon(CupertinoIcons.home),
+      icon: Icon(Icons.home),
       title:Text('Home1')
     ),
     BottomNavigationBarItem(
-      icon: Icon(CupertinoIcons.search),
+      icon: Icon(Icons.list),
       title:Text('Catagory')
     ),
     BottomNavigationBarItem(
@@ -43,7 +46,7 @@ class _IndexPageState extends State<IndexPage> {
       title:Text('Cart')
     ),
     BottomNavigationBarItem(
-      icon: Icon(CupertinoIcons.person_add),
+      icon: Icon(Icons.person),
       title:Text('Account')
     )
   ];
@@ -58,9 +61,12 @@ class _IndexPageState extends State<IndexPage> {
   int currentIndex = 0;
   var currentPage;
 
+  //List list = [];
+
   @override
   void initState() {
     currentPage = tabPages[currentIndex];
+    //_getCategory();
     super.initState();
   }
 
@@ -87,36 +93,24 @@ class _IndexPageState extends State<IndexPage> {
         index: currentIndex,
         children: tabPages
       ),
-      drawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            Container(
-              height:140.0,
-              child:DrawerHeader(
-                child: UserAccountsDrawerHeader(
-                  accountName: Text("Ashish Rawat"),
-                  accountEmail: Text("ashishrawat2911@gmail.com"),
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                  ),
-                  onDetailsPressed:(){
-                    print('user click');
-                  }
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                
-              )
-            ),
-            MainMenus(),
-          ],
-        )
-      ),
+      drawer: MyDrawer()
+      
     );
   }
+
+  // void _getCategory() async{
+
+  //   await getData('getCatagory').then((val){
+  //     //print(val['data']['data']);
+  //     CatagoryListModel catagory = CatagoryListModel.fromJson(val['data']);
+
+  //     setState(() {
+  //      list = catagory.data;
+  //     });
+      
+  //     //catagory.data.forEach((item)=>print(item.catagoryName));
+  //   });
+  // }  
 }
 
 

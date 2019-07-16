@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../service/service_method.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import '../../model/goodlist.dart';
 //产品列表
 class CatagoryGoodList extends StatefulWidget {
   @override
@@ -8,6 +10,8 @@ class CatagoryGoodList extends StatefulWidget {
 }
 
 class _CatagoryGoodListState extends State<CatagoryGoodList> {
+  GlobalKey<RefreshFooterState> _footerkey = new GlobalKey<RefreshFooterState>();
+  
   int page = 1;
   List<Map> goodsList = [];
 
@@ -18,9 +22,30 @@ class _CatagoryGoodListState extends State<CatagoryGoodList> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width:750, height: 1334)..init(context);//初始化屏幕适配
-    return Container(
-      child: _goods(),
+    return EasyRefresh(
+      autoLoad:true,
+      refreshFooter: ClassicsFooter(
+        key: _footerkey,
+        bgColor: Colors.white,
+        textColor: Colors.pink,
+        moreInfoColor: Colors.pink,
+        showMore: false,
+        
+        noMoreText: '',
+        moreInfo: 'Loading...',
+        loadReadyText: 'pull load...',
+      ),
+      child: Container(
+        child: _goods(),
+      ),
+      loadMore:() {
+        //print('===Load More===');
+        _getGoodList();
+      }
     );
+    // return Container(
+    //   child: _goods(),
+    // );
   }
 
   Widget _wrapList(){
@@ -76,15 +101,15 @@ class _CatagoryGoodListState extends State<CatagoryGoodList> {
     );
   }
 
-  void _getGoodList() {
+  void _getGoodList() async{
     var data = {
       'catagoryId':'4',
       'page':page
     };
 
-    getData('getGoods',formData:data).then((val){
+    await getData('getGoods',formData:data).then((val){
       //print(val);
-      //GoodListModel goodList = GoodListModel.fromJson(val);
+      GoodListModel goodList = GoodListModel.fromJson(val);
       //print(goodList.data[0].name);
       var data = val;
       List<Map> newGoodsList = (data['data'] as List).cast();

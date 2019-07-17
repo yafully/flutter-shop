@@ -27,27 +27,7 @@ class _CatagoryPageState extends State<CatagoryPage> {
       // body:Container(
       //   child:CatagoryGoodList()
       // )
-      body:CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            //title: Text('Catagory Sort'),
-            //pinned: true,
-            floating: true,
-            expandedHeight: 150.0,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text('Catagory Sort'),
-              background: Image.asset('images/drawer_bg.jpg',fit: BoxFit.cover,),
-            ),
-          ),
-          SliverSafeArea(
-            sliver: SliverPadding(
-              padding: EdgeInsets.all(8.0),
-              sliver: CatagoryListSliver(),
-            ),
-          )
-          
-        ],
-      )
+      body:MyScrollView()
     );
   }
 

@@ -99,7 +99,7 @@ class _CatagoryListSliverState extends State<CatagoryListSliver> {
     //   child: _goods(),
     // );
     var itemWidth = ScreenUtil().setWidth(372);
-    var itemHeight = ScreenUtil().setHeight(420);
+    var itemHeight = ScreenUtil().setHeight(470);
     return  SliverGrid(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -115,7 +115,7 @@ class _CatagoryListSliverState extends State<CatagoryListSliver> {
               child: Container(
                 //width: ScreenUtil().setWidth(372),
                 decoration: BoxDecoration(
-                  color: Colors.black26,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(8.0)
                 ),
                 //color: Colors.black26,
@@ -123,20 +123,41 @@ class _CatagoryListSliverState extends State<CatagoryListSliver> {
                 //margin: EdgeInsets.only(bottom: 3.0),
                 child: Column(
                   children: <Widget>[
-                    Image.network(widget.goodsList[index]['image'],fit: BoxFit.cover,),
-                    Text(
-                      widget.goodsList[index]['name'],
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color:Colors.pink,fontSize: ScreenUtil().setSp(24)),
-                      ),
-                      Row(children: <Widget>[
-                        Text('\$${widget.goodsList[index]['finalprice']}'),
-                        Text(
-                          '\$${widget.goodsList[index]['price']}',
-                          style:TextStyle(color:Colors.grey,decoration: TextDecoration.lineThrough)
-                        )
-                      ],)
+                    ClipRRect(
+                        borderRadius: new BorderRadius.circular(8.0),
+                        child: Image.network(widget.goodsList[index]['image'],fit: BoxFit.cover,),
+                    ),
+                    
+                    Container(
+                      padding: EdgeInsets.all(8.0),
+                      child:Column(
+                        children: <Widget>[
+                          Text(
+                            widget.goodsList[index]['name'],
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color:Color.fromRGBO(69, 69, 69, 1.0),fontSize: ScreenUtil().setSp(30)),
+                          ),
+                          
+                          Row(children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(left: 5.0),
+                              child: Text(
+                                '\$${widget.goodsList[index]['finalprice']}',
+                                style: TextStyle(color:Color.fromRGBO(217, 90, 11, 1.0),fontSize: ScreenUtil().setSp(30)),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 5.0),
+                              child: Text(
+                                '\$${widget.goodsList[index]['price']}',
+                                style:TextStyle(color:Colors.grey,decoration: TextDecoration.lineThrough,fontSize: ScreenUtil().setSp(22))
+                              )
+                            )
+                          ],)
+                        ],
+                      )
+                    )
                   ],
                 ),
               ),

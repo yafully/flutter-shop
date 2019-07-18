@@ -27,6 +27,7 @@ class _CatagoryPageState extends State<CatagoryPage> {
       // body:Container(
       //   child:CatagoryGoodList()
       // )
+      backgroundColor: Color.fromRGBO(242, 242, 242, 1.0),
       body:MyScrollView()
     );
   }

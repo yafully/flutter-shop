@@ -3,6 +3,7 @@ import '../../service/service_method.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import '../../model/goodlist.dart';
+import '../Detail/catagory_detail.dart';//首页楼层
 
 class MyScrollView extends StatefulWidget {
   @override
@@ -110,60 +111,63 @@ class _CatagoryListSliverState extends State<CatagoryListSliver> {
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index){
           return InkWell(
-            onTap: (){},
+            splashColor: Colors.white.withOpacity(0.3),
+            highlightColor: Colors.white.withOpacity(0.1),
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>CatagoryDetail(productTitle:widget.goodsList[index]['name']))
+              );
+            },
             
-              child: Container(
-                //width: ScreenUtil().setWidth(372),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8.0)
-                ),
-                //color: Colors.black26,
-                //padding: EdgeInsets.all(5.0),
-                //margin: EdgeInsets.only(bottom: 3.0),
-                child: Column(
-                  children: <Widget>[
-                    ClipRRect(
-                        borderRadius: new BorderRadius.circular(8.0),
-                        child: Image.network(widget.goodsList[index]['image'],fit: BoxFit.cover,),
-                    ),
-                    
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      child:Column(
-                        children: <Widget>[
-                          Text(
-                            widget.goodsList[index]['name'],
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color:Color.fromRGBO(69, 69, 69, 1.0),fontSize: ScreenUtil().setSp(30)),
-                          ),
-                          
-                          Row(children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.only(left: 5.0),
-                              child: Text(
-                                '\$${widget.goodsList[index]['finalprice']}',
-                                style: TextStyle(color:Color.fromRGBO(217, 90, 11, 1.0),fontSize: ScreenUtil().setSp(30)),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(left: 5.0),
-                              child: Text(
-                                '\$${widget.goodsList[index]['price']}',
-                                style:TextStyle(color:Colors.grey,decoration: TextDecoration.lineThrough,fontSize: ScreenUtil().setSp(22))
-                              )
-                            )
-                          ],)
-                        ],
-                      )
-                    )
-                  ],
-                ),
+            child: Container(
+              //width: ScreenUtil().setWidth(372),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8.0)
               ),
+              //color: Colors.black26,
+              //padding: EdgeInsets.all(5.0),
+              //margin: EdgeInsets.only(bottom: 3.0),
+              child: Column(
+                children: <Widget>[
+                  ClipRRect(
+                      borderRadius: new BorderRadius.circular(8.0),
+                      child: Image.network(widget.goodsList[index]['image'],fit: BoxFit.cover,),
+                  ),
+                  
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    child:Column(
+                      children: <Widget>[
+                        Text(
+                          widget.goodsList[index]['name'],
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color:Color.fromRGBO(69, 69, 69, 1.0),fontSize: ScreenUtil().setSp(30)),
+                        ),
+                        
+                        Row(children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.only(left: 5.0),
+                            child: Text(
+                              '\$${widget.goodsList[index]['finalprice']}',
+                              style: TextStyle(color:Color.fromRGBO(217, 90, 11, 1.0),fontSize: ScreenUtil().setSp(30)),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 5.0),
+                            child: Text(
+                              '\$${widget.goodsList[index]['price']}',
+                              style:TextStyle(color:Colors.grey,decoration: TextDecoration.lineThrough,fontSize: ScreenUtil().setSp(22))
+                            )
+                          )
+                        ],)
+                      ],
+                    )
+                  )
+                ],
+              ),
+            ),
 
-            
-            
           );
         },
         childCount: widget.goodsList.length

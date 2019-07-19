@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         title: 'My Store1',
         debugShowCheckedModeBanner: false,
         theme:ThemeData(
-          primaryColor: Colors.pink
+          primaryColor: Colors.white
         ),
         home:IndexPage()
       ),
